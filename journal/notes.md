@@ -1,0 +1,7 @@
+- Create a simple sqlite-like sql DBMS
+- Implement a set of commands all the way through, persisting with a log that can be used for repopulating
+  - CREATE TABLE
+  - INSERT INTO TABLE
+  - SELECT FROM TABLE
+  - DELETE FROM TABLE
+- Start with Scanning/lexing, use parsed commands to update in-memory representation, write successful command to log
