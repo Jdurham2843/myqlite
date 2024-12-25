@@ -1,6 +1,6 @@
-package com.jdurham;
+package com.jdurham.parsing;
 
-public record Token(TokenType tokenType, String lexeme) {
+record Token(TokenType tokenType, String lexeme) {
 
     enum TokenType {
         IDENTIFIER,

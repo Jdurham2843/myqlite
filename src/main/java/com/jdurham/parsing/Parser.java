@@ -1,4 +1,4 @@
-package com.jdurham;
+package com.jdurham.parsing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,12 @@ public class Parser {
     private final List<Token> tokens;
     private int cursor = -1;
 
-    public Parser(List<Token> tokens) {
+    public static Parser build(String input) {
+        final Lexer lexer = new Lexer(input);
+        return new Parser(lexer.scan());
+    }
+
+    private Parser(List<Token> tokens) {
         this.tokens = tokens;
     }
 
@@ -16,7 +21,7 @@ public class Parser {
         final Token initialToken = next();
         Statement statement = null;
 
-        switch(initialToken.lexeme()) {
+        switch (initialToken.lexeme()) {
             case "SELECT":
             case "select":
             case "Select":

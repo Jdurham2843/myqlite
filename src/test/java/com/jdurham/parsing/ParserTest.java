@@ -1,19 +1,16 @@
-package com.jdurham;
+package com.jdurham.parsing;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 class ParserTest {
 
     @Test
     void parseSelectStatement() {
         final String selectStatementStr = "SELECT id FROM my_table;";
-        final Lexer lexer = new Lexer(selectStatementStr);
-        final List<Token> tokens = lexer.scan();
-        final Parser parser = new Parser(tokens);
+        final Parser parser = Parser.build(selectStatementStr);
         final Statement statement = parser.parse();
 
         assertInstanceOf(SelectStatement.class, statement);

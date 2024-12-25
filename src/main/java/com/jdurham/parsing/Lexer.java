@@ -1,20 +1,20 @@
-package com.jdurham;
+package com.jdurham.parsing;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Lexer {
+class Lexer {
 
     private final String input;
     private int cursor = -1;
     private List<Token> tokens = new ArrayList<>();
 
-    public Lexer(String input) {
+    Lexer(String input) {
         this.input = input.trim();
     }
 
-    public List<Token> scan() {
+    List<Token> scan() {
 
         Optional<Character> currentCharOpt = next();
         StringBuilder lexemeBuilder = new StringBuilder();
