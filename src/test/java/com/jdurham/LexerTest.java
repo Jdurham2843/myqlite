@@ -20,4 +20,13 @@ class LexerTest {
         assertEquals(Token.TokenType.SEMICOLON, tokens.getLast().tokenType());
     }
 
+    @Test
+    void scanCreateTableStatement() {
+        final String createStatement = "CREATE TABLE my_table (id INT, age INT);";
+        final Lexer lexer = new Lexer(createStatement);
+
+        final List<Token> tokens = lexer.scan();
+        assertEquals(11, tokens.size());
+    }
+
 }

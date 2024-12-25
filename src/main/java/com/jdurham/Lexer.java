@@ -17,17 +17,44 @@ public class Lexer {
     public List<Token> scan() {
 
         Optional<Character> currentCharOpt = next();
+        StringBuilder lexemeBuilder = new StringBuilder();
         while (currentCharOpt.isPresent()) {
-            final StringBuilder lexemeBuilder = new StringBuilder();
             char currentChar = currentCharOpt.get();
 
             switch (currentChar) {
                 case ' ':
-                    tokens.add(new Token(Token.TokenType.IDENTIFIER, lexemeBuilder.toString()));
+                    if (lexemeBuilder.length() > 0) {
+                        tokens.add(new Token(Token.TokenType.IDENTIFIER, lexemeBuilder.toString()));
+                        lexemeBuilder = new StringBuilder();
+                    }
                     break;
                 case ';':
-                    tokens.add(new Token(Token.TokenType.IDENTIFIER, lexemeBuilder.toString()));
+                    if (lexemeBuilder.length() > 0) {
+                        tokens.add(new Token(Token.TokenType.IDENTIFIER, lexemeBuilder.toString()));
+                        lexemeBuilder = new StringBuilder();
+                    }
                     tokens.add(new Token(Token.TokenType.SEMICOLON, ";"));
+                    break;
+                case '(':
+                    if (lexemeBuilder.length() > 0) {
+                        tokens.add(new Token(Token.TokenType.IDENTIFIER, lexemeBuilder.toString()));
+                        lexemeBuilder = new StringBuilder();
+                    }
+                    tokens.add(new Token(Token.TokenType.OPEN_PARENTHESES, "("));
+                    break;
+                case ')':
+                    if (lexemeBuilder.length() > 0) {
+                        tokens.add(new Token(Token.TokenType.IDENTIFIER, lexemeBuilder.toString()));
+                        lexemeBuilder = new StringBuilder();
+                    }
+                    tokens.add(new Token(Token.TokenType.CLOSE_PARENTHESES, ")"));
+                    break;
+                case ',':
+                    if (lexemeBuilder.length() > 0) {
+                        tokens.add(new Token(Token.TokenType.IDENTIFIER, lexemeBuilder.toString()));
+                        lexemeBuilder = new StringBuilder();
+                    }
+                    tokens.add(new Token(Token.TokenType.COMMA, ","));
                     break;
                 default:
                     lexemeBuilder.append(currentChar);
